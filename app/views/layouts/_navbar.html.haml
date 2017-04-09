@@ -1,0 +1,17 @@
+%nav.navbar.navbar-default.navbar-inverse{:role => "navigation"}
+  #navigationbar.collapse.navbar-collapse
+  .navbar-header
+    %ul.nav.navbar-nav
+      %li
+        = link_to books_path(loaned_out: false) do
+          = "Tilgængelige bøger"
+      %li
+        = link_to books_path(loaned_out: true) do
+          = "Udlånte bøger"
+      %li
+        = link_to books_path do
+          = "Administrér bøger"
+      %li
+        = link_to "#" do
+          = "Hjælp"
+

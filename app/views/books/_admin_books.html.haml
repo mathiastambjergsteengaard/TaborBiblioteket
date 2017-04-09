@@ -1,0 +1,50 @@
+.row
+  .col-xs-1
+  .col-xs-11
+    %h1= "Administrér Bøger"
+
+.row
+  .col-xs-1
+  .col-xs-11
+    = link_to new_book_path do
+      .btn.btn-default
+        = "Opret ny bog"
+%br
+.row
+  .col-xs-1
+  .col-xs-3
+    = "Titel, forfatter og udgivelse"
+  .col-xs-3
+    = "Beskrivelse"
+  .col-xs-3
+    = "Bogens ejer"
+  .col-xs-1
+
+%hr
+- @books.each do |book|
+  .row
+    .col-xs-1
+    .col-xs-3
+      = book.title + ", " + book.author + ", " + book.edition.to_s
+    .col-xs-3
+      = book.description
+    .col-xs-2
+      = book.owner
+    .col-xs-2
+      = link_to edit_book_path(book) do
+        .btn.btn-default
+          = "Redigér"
+      = link_to book_path(book), method: :delete do
+        .btn.btn-default.confirm
+          = "Slet"
+
+  %hr
+
+
+:javascript
+
+  $(function() {
+    $('.confirm').click(function() {
+        return window.confirm("Er du sikker på at du vil slette denne bog");
+    });
+  });

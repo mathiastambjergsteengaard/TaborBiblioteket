@@ -1,0 +1,16 @@
+.row
+  .col-xs-1
+  .col-xs-11
+    %h1= "Redigér bogen " + @book.title
+
+.row
+  .col-xs-1
+  .col-xs-11
+    = simple_form_for @book do |f|
+      = f.input :title, label: "Titel", required: true
+      = f.input :author, label: "Forfatter", required: true
+      = f.input :description, label: "Beskrivelse"
+      = f.input :edition, label: "Udgivelse"
+      = f.input :year_of_release, label: "Udgivelsesår"
+      = f.input :owner, label: "Ejer af bogen", required: true
+      = f.submit "Opret bogen", class: "btn btn-default"

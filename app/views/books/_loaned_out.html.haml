@@ -1,0 +1,40 @@
+.row
+  .col-xs-1
+  .col-xs-11
+    %h1= "Udlånte bøger"
+%br
+.row
+  .col-xs-1
+  .col-xs-2
+    = "Titel, forfatter"
+  .col-xs-2
+    = "Beskrivelse"
+  .col-xs-2
+    = "Bogens ejer"
+  .col-xs-2
+    = "Udlånt til"
+  .col-xs-1
+    = "Udlånt den"
+  .col-xs-1
+  .col-xs-1
+%hr
+- @books.each do |book|
+  .row
+    .col-xs-1
+    .col-xs-2
+      = book.title + ", " + book.author + ", " + book.edition.to_s
+    .col-xs-2
+      = book.description
+    .col-xs-2
+      = book.owner
+    .col-xs-2
+      = book.loaner
+    .col-xs-1
+      = book.loaned_out_at.to_s
+    .col-xs-1
+      = link_to loan_path(book),  method: :delete do
+        .btn.btn-default
+          = "Aflevér bogen"
+    .col-xs-1
+
+  %hr

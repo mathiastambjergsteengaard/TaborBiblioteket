@@ -1,0 +1,7 @@
+
+- if params[:loaned_out] == "false" || (params[:search] && params[:search][:loaned_out] == "false")
+  = render partial: "not_loaned_out"
+- elsif params[:loaned_out] == "true" || (params[:search] && params[:search][:loaned_out] == "false")
+  = render partial: "loaned_out"
+- else
+  = render partial: "admin_books"

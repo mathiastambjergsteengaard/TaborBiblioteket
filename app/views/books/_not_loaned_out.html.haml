@@ -1,0 +1,42 @@
+.row
+  .col-xs-1
+  .col-xs-11
+    %h1= "Tilgængelige bøger"
+
+-#.row
+-#  .col-xs-1
+-#  .col-xs-11
+-#    = simple_form_for :search, url: books_path, required: false, method: :get do |f|
+-#      = f.input :loaned_out, as: :hidden, input_html: { value: "false"}
+-#      = f.input :search
+-#      .pull-left
+-#        = f.submit "Søg", class: 'btn btn-default'
+-#
+-#    = link_to books_path(loaned_out: "false") do
+-#      .btn.btn-default
+-#        = "Nulstil søgningen"
+%br
+.row
+  .col-xs-1
+  .col-xs-3
+    = "Titel, forfatter og udgivelse"
+  .col-xs-3
+    = "Beskrivelse"
+  .col-xs-3
+    = "Bogens ejer"
+  .col-xs-1
+%hr
+- @books.each do |book|
+  .row
+    .col-xs-1
+    .col-xs-3
+      = book.title + ", " + book.author + ", " + book.edition.to_s
+    .col-xs-3
+      = book.description
+    .col-xs-3
+      = book.owner
+    .col-xs-1
+      = link_to new_loan_path(book_id: book.id) do
+        .btn.btn-default
+          = "Lån bogen"
+  %hr
