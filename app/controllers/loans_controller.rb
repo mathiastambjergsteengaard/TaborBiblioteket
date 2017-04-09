@@ -5,7 +5,7 @@ class LoansController < ApplicationController
 
   def update
     @book = Book.find(params[:id])
-    @book.loaner = params[:loaner]
+    @book.loaner = params[:book][:loaner]
     @book.loaned_out_at = Date.today
     @book.save
     redirect_to books_path(loaned_out: "false")
