@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'books#index'
+  root :to => redirect('/books?loaned_out=false')
 
   resources :books
   resources :loans

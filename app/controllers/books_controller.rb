@@ -6,8 +6,10 @@ class BooksController < ApplicationController
       @books = @books.select{ |book| book.loaned_out_at.present? }
     elsif params[:loaned_out] == "false"
       @books = @books.select{ |book| !book.loaned_out_at.present? }
-    else
+    elsif params[:loaned_out] == "1234"
       @books
+    else
+      redirect_to books_path(loaned_out: false)
     end
   end
 
