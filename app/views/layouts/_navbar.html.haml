@@ -1,11 +1,12 @@
-%nav.navbar.navbar-default.navbar-inverse{:role => "navigation"}
-  #navigationbar.collapse.navbar-collapse
-  .navbar-header
+%nav.navbar.navbar-default
+  .container-fluid
+    .navbar-header
+      %a.navbar-brand{:href => "#"} TaborBiblioteket
     %ul.nav.navbar-nav
-      %li
+      %li{ class: params[:loaned_out] == "false" ? "active" : "" }
         = link_to books_path(loaned_out: false) do
           = "Tilgængelige bøger"
-      %li
+      %li{ class: params[:loaned_out] == "true" ? "active" : "" }
         = link_to books_path(loaned_out: true) do
           = "Udlånte bøger"
 

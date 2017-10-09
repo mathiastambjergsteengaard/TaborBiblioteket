@@ -1,40 +1,55 @@
-.row
-  .col-xs-1
-  .col-xs-11
-    %h1= "Udlånte bøger"
-%br
-.row
-  .col-xs-1
-  .col-xs-2
-    = "Titel, forfatter"
-  .col-xs-2
-    = "Beskrivelse"
-  .col-xs-2
-    = "Bogens ejer"
-  .col-xs-2
-    = "Udlånt til"
-  .col-xs-1
-    = "Udlånt den"
-  .col-xs-1
-  .col-xs-1
-%hr
-- @books.each do |book|
+- if @browser.device.mobile?
+  %h2= "Udlånte bøger"
+  - @books.each do |book|
+    .panel.panel-default
+      .panel-body
+        .row
+          .col-xs-3
+            = book.title
+          .col-xs-4
+            = "Udlånt til " + book.loaner
+          .col-xs-4
+            = link_to loan_path(book),  method: :delete do
+              .btn.btn-default
+                = "Aflevér bogen"
+- else
+  .row
+    .col-xs-1
+    .col-xs-11
+      %h1= "Udlånte bøger"
+  %br
   .row
     .col-xs-1
     .col-xs-2
-      = book.title + ", " + book.author + ", " + book.edition.to_s
+      = "Titel, forfatter"
     .col-xs-2
-      = book.description
+      = "Beskrivelse"
     .col-xs-2
-      = book.owner
+      = "Bogens ejer"
     .col-xs-2
-      = book.loaner
+      = "Udlånt til"
     .col-xs-1
-      = book.loaned_out_at.to_s
+      = "Udlånt den"
     .col-xs-1
-      = link_to loan_path(book),  method: :delete do
-        .btn.btn-default
-          = "Aflevér bogen"
     .col-xs-1
-
   %hr
+  - @books.each do |book|
+    .row
+      .col-xs-1
+      .col-xs-2
+        = book.title + ", " + book.author + ", " + book.edition.to_s
+      .col-xs-2
+        = book.description
+      .col-xs-2
+        = book.owner
+      .col-xs-2
+        = book.loaner
+      .col-xs-1
+        = book.loaned_out_at.to_s
+      .col-xs-1
+        = link_to loan_path(book),  method: :delete do
+          .btn.btn-default
+            = "Aflevér bogen"
+      .col-xs-1
+
+    %hr

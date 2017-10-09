@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   def index
+    @mobile = mobile?
     # params[:search].present? ? @books = Book.where(:title =~ params[:search]) : @books = Book.all
     @books = Book.all
     if params[:loaned_out] == "true"
