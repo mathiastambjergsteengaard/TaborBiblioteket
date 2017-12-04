@@ -1,17 +1,29 @@
 - if @browser.device.mobile?
-  %h2= "Udlånte bøger"
+  .row
+    .col-xs-12
+      %h2.text-center= "Udlånte bøger"
+  .row.row-space
+    .col-xs-12
+      .form-group.search-field
+        %label{:for => "usr"} Søg:
+        %input#usr.form-control{:type => "text"}/
+
   - @books.each do |book|
-    .panel.panel-default
-      .panel-body
-        .row
-          .col-xs-3
-            = book.title
-          .col-xs-4
-            = "Udlånt til " + book.loaner
-          .col-xs-4
-            = link_to loan_path(book),  method: :delete do
-              .btn.btn-default
-                = "Aflevér bogen"
+    .book
+      .panel.panel-default.mobile_panel
+        .panel-body
+          .row
+            .col-xs-12
+              %h3= book.title
+          .row.row-space
+            .col-xs-12
+              = "Udlånt til " + book.loaner
+          .row
+            .col-xs-12
+              = book.description
+      = link_to loan_path(book),  method: :delete do
+        .btn.btn-default.return_button
+          = "Aflevér bogen"
 - else
   .row
     .col-xs-1
@@ -37,7 +49,7 @@
     .row
       .col-xs-1
       .col-xs-2
-        = book.title + ", " + book.author + ", " + book.edition.to_s
+        %h2= book.title
       .col-xs-2
         = book.description
       .col-xs-2
@@ -53,3 +65,18 @@
       .col-xs-1
 
     %hr
+
+:javascript
+  $( document ).ready(function() {
+    console.log( "ready!" );
+    $("input").on('change keyup paste', function() {
+      search_value = this.value
+      $('.book').each(function(){
+        if ($(this).find('h3').html().toUpperCase().indexOf(search_value.toUpperCase()) > -1) {
+          $(this).show()
+        } else {
+          $(this).hide()
+        }
+      })
+    });
+  });
